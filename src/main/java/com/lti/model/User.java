@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,16 +31,17 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	private Date userDOB;
 	private Address userAddress;
-	@Column(unique = true)
+	@Column(nullable = true)
 	private long userAadhar;
 	// Father's Details
 	private Family family;
 	// Courses
 	@OneToMany(mappedBy = "primaryKey.user", cascade = CascadeType.ALL)
-	private List<UserSector> sectors = new ArrayList<UserSector>();
+	private List<UserNGO> sectors = new ArrayList<UserNGO>();
+	@OneToOne(mappedBy = "user")
+	private SukanyaAccount sukanyaAccount;
 
 	public User() {
-
 	}
 
 	public int getUserId() {
@@ -114,15 +116,15 @@ public class User {
 		this.family = family;
 	}
 
-	public List<UserSector> getSectors() {
+	public List<UserNGO> getSectors() {
 		return sectors;
 	}
 
-	public void setSectors(List<UserSector> sectors) {
+	public void setSectors(List<UserNGO> sectors) {
 		this.sectors = sectors;
 	}
 
-	public void addUserSector(UserSector userSector) {
+	public void addUserSector(UserNGO userSector) {
 		this.sectors.add(userSector);
 	}
 

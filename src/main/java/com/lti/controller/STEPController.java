@@ -1,6 +1,8 @@
 package com.lti.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,18 +22,18 @@ public class STEPController {
 	private UserService userService;
 	
 	@PostMapping("/userRegister")
-	public User registerUser(@RequestBody User user) throws Exception {
+	public User registerUser(@RequestBody User user) {
 		String tempEmail = user.getUserEmailId();
 		if(tempEmail != null && !"".equals(tempEmail)) {
 			User tempUser = userService.getUserByEmail(tempEmail);
 			if(tempUser != null)
-				throw new Exception("User with "+tempEmail+" Already Exist!!");
+				throw new RuntimeException("User Already Exist");
 		}
 		return userService.saveUser(user);
 	}
 	
-	@GetMapping("/userLogin")
-	public User loginUser(@RequestBody User user) throws Exception {
+	@PostMapping("/userLogin")
+	public User loginUser(@RequestBody User user) {
 		String emailId = user.getUserEmailId();
 		String password = user.getUserPassword();
 		User tempUser = null;
@@ -39,7 +41,7 @@ public class STEPController {
 			tempUser = userService.getUserByEmailAndPassword(emailId, password);
 		}
 		if(tempUser==null)
-			throw new Exception("Bad Credentials");
+			throw new RuntimeException("Bad Credentials");
 		return tempUser;
 	}
 

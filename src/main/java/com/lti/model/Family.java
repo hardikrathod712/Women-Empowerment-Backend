@@ -8,16 +8,23 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Family {
 
+	@Column(nullable = true)
 	private String fatherName;
+	@Column(nullable = true)
 	private String fatherPhoneNumber;
+	@Column(nullable = true)
 	private Date fatherDOB;
+	@Column(nullable = true)
 	private String fatherOccupation;
 	@Column(nullable = true)
 	private int fatherSalary;
-	
+	@Column(nullable = true)
 	private String motherName;
+	@Column(nullable = true)
 	private String motherPhoneNumber;
+	@Column(nullable = true)
 	private Date motherDOB;
+	@Column(nullable = true)
 	private String motherOccupation;
 	@Column(nullable = true)
 	private int motherSalary;

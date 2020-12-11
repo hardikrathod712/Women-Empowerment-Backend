@@ -1,11 +1,14 @@
 package com.lti.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,16 +19,12 @@ public class TrainingSector {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int sectorId;
-	private String ngoName;
 	private String sectorName;
 	private String sectorDescription;
-	@Temporal(TemporalType.DATE)
-	private Date startDate;
-	@Temporal(TemporalType.DATE)
-	private Date endDate;
-	private Address trainingAddress;
-	private int trainingSeats;
-
+	
+	@OneToMany(mappedBy="sector")
+	private List<NGO> ngo=new ArrayList<NGO>();
+	
 	public TrainingSector() {
 
 	}
@@ -36,14 +35,6 @@ public class TrainingSector {
 
 	public void setSectorId(int sectorId) {
 		this.sectorId = sectorId;
-	}
-
-	public String getNgoName() {
-		return ngoName;
-	}
-
-	public void setNgoName(String ngoName) {
-		this.ngoName = ngoName;
 	}
 
 	public String getSectorName() {
@@ -61,37 +52,6 @@ public class TrainingSector {
 	public void setSectorDescription(String sectorDescription) {
 		this.sectorDescription = sectorDescription;
 	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public Address getTrainingAddress() {
-		return trainingAddress;
-	}
-
-	public void setTrainingAddress(Address trainingAddress) {
-		this.trainingAddress = trainingAddress;
-	}
-
-	public int getTrainingSeats() {
-		return trainingSeats;
-	}
-
-	public void setTrainingSeats(int trainingSeats) {
-		this.trainingSeats = trainingSeats;
-	}
-
+	
+	
 }

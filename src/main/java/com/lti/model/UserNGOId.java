@@ -9,13 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class UserSectorId implements Serializable {
+public class UserNGOId implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
 	@ManyToOne(cascade = CascadeType.ALL)
-	private TrainingSector sector;
+	private NGO ngo;
 
 	public User getUser() {
 		return user;
@@ -25,12 +25,15 @@ public class UserSectorId implements Serializable {
 		this.user = user;
 	}
 
-	public TrainingSector getSector() {
-		return sector;
+	public NGO getNgo() {
+		return ngo;
 	}
 
-	public void setSector(TrainingSector sector) {
-		this.sector = sector;
+	public void setNgo(NGO ngo) {
+		this.ngo = ngo;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

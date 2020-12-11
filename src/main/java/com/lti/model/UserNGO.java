@@ -14,28 +14,28 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "UserSector")
+@Table(name = "UserNGO")
 @AssociationOverrides({ @AssociationOverride(name = "primaryKey.user", joinColumns = @JoinColumn(name = "userId")),
-		@AssociationOverride(name = "primaryKey.sector", joinColumns = @JoinColumn(name = "sectorId")) })
-public class UserSector {
+		@AssociationOverride(name = "primaryKey.ngo", joinColumns = @JoinColumn(name = "ngoId")) })
+public class UserNGO {
 
 	@EmbeddedId
-	private UserSectorId primaryKey;
+	private UserNGOId primaryKey;
 	// Additional Fields
 	private boolean status;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "AppliedDate")
 	private Date appliedAt;
 	
-	public UserSector() {
+	public UserNGO() {
 		
 	}
 
-	public UserSectorId getPrimaryKey() {
+	public UserNGOId getPrimaryKey() {
 		return primaryKey;
 	}
 
-	public void setPrimaryKey(UserSectorId primaryKey) {
+	public void setPrimaryKey(UserNGOId primaryKey) {
 		this.primaryKey = primaryKey;
 	}
 	
@@ -49,12 +49,12 @@ public class UserSector {
 	}
 	
 	@Transient
-	public TrainingSector getSector() {
-		return getPrimaryKey().getSector();
+	public NGO getNgo() {
+		return getPrimaryKey().getNgo();
 	}
 	
-	public void setSector(TrainingSector sector) {
-		getPrimaryKey().setSector(sector);;
+	public void setNgo(NGO ngo) {
+		getPrimaryKey().setNgo(ngo);
 	}
 
 	public boolean isStatus() {
