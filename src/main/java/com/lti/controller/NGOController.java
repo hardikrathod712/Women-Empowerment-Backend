@@ -56,6 +56,12 @@ public class NGOController {
 			throw new Exception("Bad Credentials");
 		return tempNGO;
 	}
+	
+	@GetMapping("/getNGO/{sectorName}")
+	public List<NGO> getNGOBySector(@PathVariable("sectorName") String sectorName) {
+		TrainingSector sector = trainingservice.getTrainingSectorByName(sectorName);
+		return ngoService.getNgoBySectorId(sector.getSectorId());
+	}
 
 	// get all ngos
 	@GetMapping("/listNgo")
@@ -72,6 +78,11 @@ public class NGOController {
 	@PutMapping("/updateNgo")
 	public NGO updateNgo(@RequestBody NGO ngo) {
 		return ngoService.updateNgo(ngo);
+	}
+	
+	@GetMapping("/approvedNgo")
+	public List<NGO> getApprovedNgo() {
+		return ngoService.getApprovedNgo();
 	}
 
 }

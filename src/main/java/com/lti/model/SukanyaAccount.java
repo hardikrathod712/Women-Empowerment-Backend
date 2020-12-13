@@ -22,9 +22,10 @@ public class SukanyaAccount{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int sukanyaAccountId;
 	private String account_type;
-	private String account_number;
+	private Long account_number;
 	@Temporal(TemporalType.DATE)
 	private Date registration_date;
+	private Long balance;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
@@ -39,11 +40,11 @@ public class SukanyaAccount{
 		this.account_type = account_type;
 	}
 
-	public String getAccount_number() {
+	public Long getAccount_number() {
 		return account_number;
 	}
 
-	public void setAccount_number(String account_number) {
+	public void setAccount_number(Long account_number) {
 		this.account_number = account_number;
 	}
 
@@ -55,8 +56,30 @@ public class SukanyaAccount{
 		this.registration_date = registration_date;
 	}
 	
-	
-	
+	public int getSukanyaAccountId() {
+		return sukanyaAccountId;
+	}
+
+	public void setSukanyaAccountId(int sukanyaAccountId) {
+		this.sukanyaAccountId = sukanyaAccountId;
+	}
+
+	public Long getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Long balance) {
+		this.balance = balance;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Account_type=" + account_type + ", account_number=" + account_number + ", registration_date="

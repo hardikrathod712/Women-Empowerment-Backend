@@ -38,11 +38,14 @@ public class User {
 	// Courses
 	@OneToMany(mappedBy = "primaryKey.user", cascade = CascadeType.ALL)
 	private List<UserNGO> sectors = new ArrayList<UserNGO>();
+	
 	@OneToOne(mappedBy = "user")
 	private SukanyaAccount sukanyaAccount;
 
 	public User() {
 	}
+	
+	
 
 	public int getUserId() {
 		return userId;
@@ -116,10 +119,6 @@ public class User {
 		this.family = family;
 	}
 
-	public List<UserNGO> getSectors() {
-		return sectors;
-	}
-
 	public void setSectors(List<UserNGO> sectors) {
 		this.sectors = sectors;
 	}
@@ -128,4 +127,11 @@ public class User {
 		this.sectors.add(userSector);
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", userEmailId=" + userEmailId + ", userPassword="
+				+ userPassword + ", userContactNumber=" + userContactNumber + ", userDOB=" + userDOB + ", userAddress="
+				+ userAddress + ", userAadhar=" + userAadhar + ", family=" + family + ", sectors=" + sectors
+				+ ", sukanyaAccount=" + sukanyaAccount + "]";
+	}
 }

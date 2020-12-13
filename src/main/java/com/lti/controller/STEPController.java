@@ -45,4 +45,12 @@ public class STEPController {
 		return tempUser;
 	}
 
+	@PostMapping("/userUpdate")
+	public User updateUser(@RequestBody User user) {
+		int userId = user.getUserId();
+		User userData = userService.getUserByUserId(userId);
+		userData.setFamily(user.getFamily());
+		userData.setUserAadhar(user.getUserAadhar());
+		return userService.updateUser(userData);
+	}
 }

@@ -22,4 +22,8 @@ public class TrainingSectorService {
 	public TrainingSector getTrainingSectorById(int id) {
 		return trainingSectorRepository.findById(id).get();
 	}
+	
+	public TrainingSector getTrainingSectorByName(String sectorName) {
+		return trainingSectorRepository.findBySectorName(sectorName);
+	}
 }

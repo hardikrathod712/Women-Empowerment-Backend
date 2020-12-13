@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Embeddable
 public class Family {
@@ -13,6 +15,7 @@ public class Family {
 	@Column(nullable = true)
 	private String fatherPhoneNumber;
 	@Column(nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date fatherDOB;
 	@Column(nullable = true)
 	private String fatherOccupation;
@@ -23,6 +26,7 @@ public class Family {
 	@Column(nullable = true)
 	private String motherPhoneNumber;
 	@Column(nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date motherDOB;
 	@Column(nullable = true)
 	private String motherOccupation;

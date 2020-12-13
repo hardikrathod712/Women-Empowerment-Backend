@@ -63,7 +63,13 @@ public class NGOService {
 		} else {
 			throw new RecordNotFoundException("Record not found with id : " + newngo.getNgoId());
 		}
-
 	}
-
+	
+	public List<NGO> getNgoBySectorId(int sectorId){
+		return ngoRepository.findBySector_SectorId(sectorId);
+	}
+	
+	public List<NGO> getApprovedNgo() {
+		return ngoRepository.findByStatus(true);
+	}
 }

@@ -1,15 +1,16 @@
 package com.lti.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,14 +33,21 @@ public class NGO {
 	private boolean status;
 	// private Address trainingAddress;
 	private int trainingSeats;
+	
+	@OneToMany(mappedBy = "primaryKey.ngo", cascade = CascadeType.ALL)
+	private List<UserNGO> users = new ArrayList<UserNGO>();
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private TrainingSector sector = new TrainingSector();
 
 	public NGO() {
 
 	}
 
+	public void setUsers(List<UserNGO> users) {
+		this.users = users;
+	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -139,7 +147,6 @@ public class NGO {
 	public NGO(int ngoId, String ngoDescription, String ngoName, String ngoContactNumber, Address ngoAddress,
 			String ngoEmailId, String ngoPassword, Date startDate, Date endDate, boolean status, int trainingSeats,
 			TrainingSector sector) {
-		super();
 		this.ngoId = ngoId;
 		this.ngoDescription = ngoDescription;
 		this.ngoName = ngoName;

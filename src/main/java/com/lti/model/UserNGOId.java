@@ -17,6 +17,15 @@ public class UserNGOId implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private NGO ngo;
 
+	public UserNGOId() {
+
+	}
+
+	public UserNGOId(User user, NGO ngo) {
+		this.user = user;
+		this.ngo = ngo;
+	}
+
 	public User getUser() {
 		return user;
 	}
