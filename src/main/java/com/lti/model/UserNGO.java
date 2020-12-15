@@ -26,9 +26,9 @@ public class UserNGO {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "AppliedDate")
 	private Date appliedAt;
-	
+
 	public UserNGO() {
-		
+
 	}
 
 	public UserNGOId getPrimaryKey() {
@@ -38,21 +38,21 @@ public class UserNGO {
 	public void setPrimaryKey(UserNGOId primaryKey) {
 		this.primaryKey = primaryKey;
 	}
-	
+
 	@Transient
 	public User getUser() {
 		return getPrimaryKey().getUser();
 	}
-	
+
 	public void setUser(User user) {
 		getPrimaryKey().setUser(user);
 	}
-	
+
 	@Transient
 	public NGO getNgo() {
 		return getPrimaryKey().getNgo();
 	}
-	
+
 	public void setNgo(NGO ngo) {
 		getPrimaryKey().setNgo(ngo);
 	}

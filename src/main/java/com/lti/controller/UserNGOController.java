@@ -23,25 +23,25 @@ import com.lti.service.UserNGOService;
 import com.lti.service.UserService;
 
 @RestController
-@RequestMapping("/userNgo")
+@RequestMapping("/userngo")
 @CrossOrigin("http://localhost:4200")
 public class UserNGOController {
-	
+
 	@Autowired
 	private UserNGOService userNGOService;
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private NGOService ngoService;
-	
-	@PostMapping("/userNgoRegister")
+
+	@PostMapping("/registerUser")
 	public UserNGO registerUser(@RequestBody UserNGO user) {
-		NGO n= ngoService.getNgoById(user.getPrimaryKey().getNgo().getNgoId());
-		User u=userService.getUserByUserId(user.getPrimaryKey().getUser().getUserId());
-		UserNGOId uid=new UserNGOId(u,n);
+		NGO n = ngoService.getNgoById(user.getPrimaryKey().getNgo().getNgoId());
+		User u = userService.getUserByUserId(user.getPrimaryKey().getUser().getUserId());
+		UserNGOId uid = new UserNGOId(u, n);
 		System.out.println(u);
 		System.out.println(n);
-		UserNGO user1=new UserNGO();
+		UserNGO user1 = new UserNGO();
 		user1.setAppliedAt(new Date());
 		user1.setStatus(user.isStatus());
 		user1.setPrimaryKey(uid);
@@ -50,20 +50,31 @@ public class UserNGOController {
 		temp.setNgo(n);
 		return temp;
 	}
-	
+
 	@GetMapping("/getTrainees")
-	public List<UserNGO> getAllAppliedUser(){
-		return userNGOService.getAllAppliedUser();		
+	public List<UserNGO> getAllAppliedUser() {
+		return userNGOService.getAllAppliedUser();
 	}
-	
-	@DeleteMapping("/deleteUser/{userId}")
-	public void deleteByUserId(@PathVariable("userId") int userId) {
-		userNGOService.deleteByUserId(userId);
+
+	@DeleteMapping("/deleteUser")
+	public void deleteUser(@RequestBody UserNGO duser) {
+		userNGOService.delete(duser);
 	}
-	
+
 	@PutMapping("/updateUser")
-	public UserNGO updateUser(UserNGO newuser) {
-		return userNGOService.registerUser(newuser);	
+	public UserNGO updateUser(@RequestBody UserNGO newuser) {
+		System.out.println(newuser.getPrimaryKey().getUser().getUserId());
+		return userNGOService.updateUserNgo(newuser);
+	}
+
+	@GetMapping("/trainee/{userId}")
+	public UserNGO getTrainee(@PathVariable int userId) {
+		return userNGOService.getTrainee(userId).get(0);
+	}
+
+	@DeleteMapping("/deleteUser/{userId}")
+	public void deleteByPrimaryKey_User_UserId(@PathVariable("userId") int userId) {
+		userNGOService.deleteByPrimaryKey_User_UserId(userId);
 	}
 
 }

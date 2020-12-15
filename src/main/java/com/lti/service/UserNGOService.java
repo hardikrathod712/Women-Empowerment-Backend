@@ -1,6 +1,5 @@
 package com.lti.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -30,13 +29,22 @@ public class UserNGOService {
 	}
 
 	// delete a record
-	public void deleteByUserId(int userId) {
-		userNgoRepository.deleteById(userId);
+	public void delete(UserNGO newuser) {
+		userNgoRepository.delete(newuser);
 	}
 
 	// update record
 	public UserNGO updateUserNgo(UserNGO newuser) {
 		return userNgoRepository.save(newuser);
+	}
+
+	public List<UserNGO> getTrainee(int userId) {
+		return userNgoRepository.findByPrimaryKey_User_UserId(userId);
+	}
+
+	// delete by user id
+	public void deleteByPrimaryKey_User_UserId(int userId) {
+		userNgoRepository.deleteByPrimaryKey_User_UserId(userId);
 	}
 
 }

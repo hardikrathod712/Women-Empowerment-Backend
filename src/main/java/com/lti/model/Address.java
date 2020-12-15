@@ -1,6 +1,5 @@
 package com.lti.model;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -14,9 +13,9 @@ public class Address {
 	private String country;
 
 	public Address() {
-		
+
 	}
-	
+
 	public Address(String address1, String address2, String city, String state, int zipCode, String country) {
 		this.address1 = address1;
 		this.address2 = address2;

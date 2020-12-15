@@ -6,13 +6,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,14 +36,9 @@ public class User {
 	// Courses
 	@OneToMany(mappedBy = "primaryKey.user", cascade = CascadeType.ALL)
 	private List<UserNGO> sectors = new ArrayList<UserNGO>();
-	
-	@OneToOne(mappedBy = "user")
-	private SukanyaAccount sukanyaAccount;
 
 	public User() {
 	}
-	
-	
 
 	public int getUserId() {
 		return userId;
@@ -131,7 +124,6 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", userEmailId=" + userEmailId + ", userPassword="
 				+ userPassword + ", userContactNumber=" + userContactNumber + ", userDOB=" + userDOB + ", userAddress="
-				+ userAddress + ", userAadhar=" + userAadhar + ", family=" + family + ", sectors=" + sectors
-				+ ", sukanyaAccount=" + sukanyaAccount + "]";
+				+ userAddress + ", userAadhar=" + userAadhar + ", family=" + family + ", sectors=" + sectors;
 	}
 }

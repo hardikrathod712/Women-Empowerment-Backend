@@ -29,11 +29,9 @@ public class NGO {
 	private Date startDate;
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
-
 	private boolean status;
-	// private Address trainingAddress;
 	private int trainingSeats;
-	
+
 	@OneToMany(mappedBy = "primaryKey.ngo", cascade = CascadeType.ALL)
 	private List<UserNGO> users = new ArrayList<UserNGO>();
 
@@ -47,7 +45,7 @@ public class NGO {
 	public void setUsers(List<UserNGO> users) {
 		this.users = users;
 	}
-	
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -146,7 +144,7 @@ public class NGO {
 
 	public NGO(int ngoId, String ngoDescription, String ngoName, String ngoContactNumber, Address ngoAddress,
 			String ngoEmailId, String ngoPassword, Date startDate, Date endDate, boolean status, int trainingSeats,
-			TrainingSector sector) {
+			List<UserNGO> users, TrainingSector sector) {
 		this.ngoId = ngoId;
 		this.ngoDescription = ngoDescription;
 		this.ngoName = ngoName;
@@ -158,6 +156,7 @@ public class NGO {
 		this.endDate = endDate;
 		this.status = status;
 		this.trainingSeats = trainingSeats;
+		this.users = users;
 		this.sector = sector;
 	}
 

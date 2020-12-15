@@ -1,19 +1,14 @@
 package com.lti.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lti.exception.RecordNotFoundException;
 import com.lti.model.NGO;
-import com.lti.model.TrainingSector;
 import com.lti.repository.NGORepository;
-import com.lti.repository.TrainingSectorRepository;
 
 @Service
 @Transactional
@@ -21,9 +16,6 @@ public class NGOService {
 
 	@Autowired
 	private NGORepository ngoRepository;
-
-	@Autowired
-	private TrainingSectorRepository trainingSectorRepository;
 
 	// insert a record
 	public NGO registerNGO(NGO ngo) {
@@ -46,30 +38,35 @@ public class NGOService {
 	}
 
 	public NGO updateNgo(NGO newngo) {
-		NGO ngodb = ngoRepository.findById(newngo.getNgoId()).get();
-		if (ngodb!=null) {
-			ngodb.setEndDate(newngo.getEndDate());
-			ngodb.setNgoAddress(newngo.getNgoAddress());
-			ngodb.setNgoContactNumber(newngo.getNgoContactNumber());
-			ngodb.setNgoDescription(newngo.getNgoDescription());
-			ngodb.setNgoEmailId(newngo.getNgoEmailId());
-			ngodb.setNgoName(newngo.getNgoName());
-			ngodb.setNgoPassword(newngo.getNgoPassword());
-			ngodb.setSector(newngo.getSector());
-			ngodb.setStartDate(newngo.getStartDate());
-			ngodb.setStatus(newngo.isStatus());
-			ngodb.setTrainingSeats(newngo.getTrainingSeats());
-			return ngodb;
-		} else {
-			throw new RecordNotFoundException("Record not found with id : " + newngo.getNgoId());
-		}
+//		NGO ngodb = ngoRepository.findById(newngo.getNgoId()).get();
+//		if (ngodb!=null) {
+//			ngodb.setEndDate(newngo.getEndDate());
+//			ngodb.setNgoAddress(newngo.getNgoAddress());
+//			ngodb.setNgoContactNumber(newngo.getNgoContactNumber());
+//			ngodb.setNgoDescription(newngo.getNgoDescription());
+//			ngodb.setNgoEmailId(newngo.getNgoEmailId());
+//			ngodb.setNgoName(newngo.getNgoName());
+//			ngodb.setNgoPassword(newngo.getNgoPassword());
+//			ngodb.setSector(newngo.getSector());
+//			ngodb.setStartDate(newngo.getStartDate());
+//			ngodb.setStatus(newngo.isStatus());
+//			ngodb.setTrainingSeats(newngo.getTrainingSeats());
+//			return ngodb;
+//		} else {
+//			throw new RecordNotFoundException("Record not found with id : " + newngo.getNgoId());
+//		}
+		return ngoRepository.save(newngo);
 	}
-	
-	public List<NGO> getNgoBySectorId(int sectorId){
+
+	public List<NGO> getNgoBySectorId(int sectorId) {
 		return ngoRepository.findBySector_SectorId(sectorId);
 	}
-	
+
 	public List<NGO> getApprovedNgo() {
 		return ngoRepository.findByStatus(true);
+	}
+
+	public NGO login(String email, String password) {
+		return ngoRepository.findByNgoEmailIdAndNgoPassword(email, password);
 	}
 }

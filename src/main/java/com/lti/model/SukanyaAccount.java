@@ -2,74 +2,76 @@ package com.lti.model;
 
 import java.util.Date;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class SukanyaAccount{
-	
+public class SukanyaAccount {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int sukanyaAccountId;
-	private String account_type;
-	private Long account_number;
+	private int accountId;
+
+	@Column(name = "AccountType")
+	private String accountType;
+	@Column(name = "AccountNumber")
+	private String accountNumber;
+	@Column(name = "Balance")
+	private double balance;
+	@Column(name = "Registration_date")
 	@Temporal(TemporalType.DATE)
-	private Date registration_date;
-	private Long balance;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private User user;
-	
-	
-	public String getAccount_type() {
-		return account_type;
+	private Date registrationDate;
+	@OneToOne
+	private User user;
+
+	public SukanyaAccount() {
+		super();
 	}
 
-	public void setAccount_type(String account_type) {
-		this.account_type = account_type;
+	public int getAccountId() {
+		return accountId;
 	}
 
-	public Long getAccount_number() {
-		return account_number;
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
 	}
 
-	public void setAccount_number(Long account_number) {
-		this.account_number = account_number;
+	public String getAccountType() {
+		return accountType;
 	}
 
-	public Date getRegistration_date() {
-		return registration_date;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
-	public void setRegistration_date(Date registration_date) {
-		this.registration_date = registration_date;
-	}
-	
-	public int getSukanyaAccountId() {
-		return sukanyaAccountId;
+	public String getAccountNumber() {
+		return accountNumber;
 	}
 
-	public void setSukanyaAccountId(int sukanyaAccountId) {
-		this.sukanyaAccountId = sukanyaAccountId;
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
-	public Long getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Long balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
 	}
 
 	public User getUser() {
@@ -82,8 +84,19 @@ public class SukanyaAccount{
 
 	@Override
 	public String toString() {
-		return "Account_type=" + account_type + ", account_number=" + account_number + ", registration_date="
-				+ registration_date + "]";
+		return "SukanyaAccount [AccountId=" + accountId + ", accountType=" + accountType + ", accountNumber="
+				+ accountNumber + ", balance=" + balance + ", registrationDate=" + registrationDate + ", user=" + user
+				+ "]";
+	}
+
+	public SukanyaAccount(int accountId, String accountType, String accountNumber, double balance,
+			Date registrationDate, User user) {
+		this.accountId = accountId;
+		this.accountType = accountType;
+		this.accountNumber = accountNumber;
+		this.balance = balance;
+		this.registrationDate = registrationDate;
+		this.user = user;
 	}
 
 }
