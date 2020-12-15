@@ -32,7 +32,6 @@ public class AccomodationController {
 
 	@PostMapping("/registerUser")
 	public User registerUser(@RequestBody User user) throws Exception {
-
 		return userService.saveUser(user);
 	}
 
@@ -61,6 +60,14 @@ public class AccomodationController {
 
 		AccomodationUser tempAcco = null;
 		tempAcco = accoService.getAccomodationById(userHostelId);
+		if (tempAcco == null)
+			throw new Exception("Bad Credentials");
+		return tempAcco;
+	}
+	
+	@GetMapping("/getAccomodationDetailsByUserId/{userId}")
+	public AccomodationUser getAccomodationDetailsByUserId(@PathVariable int userId) throws Exception {
+		AccomodationUser tempAcco = accoService.getAccomodationByUserId(userId);
 		if (tempAcco == null)
 			throw new Exception("Bad Credentials");
 		return tempAcco;

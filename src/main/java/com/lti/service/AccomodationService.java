@@ -22,4 +22,8 @@ public class AccomodationService {
 	public AccomodationUser getAccomodationById(int userHostelId) {
 		return accRepository.findById(userHostelId).get();
 	}
+	
+	public AccomodationUser getAccomodationByUserId(int userId) {
+		return accRepository.findByUser_UserId(userId);
+	}
 }
